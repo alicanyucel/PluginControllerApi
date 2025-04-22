@@ -1,9 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class HelloController : ControllerBase
+[Route("api/[controller]/[action]")]
+[ApiController]
+[AllowAnonymous]
+public class HelloController : ControllerBase
+{
+    [HttpGet]
+    public IActionResult Get() => Ok("Hello from plugin!");
+    [HttpGet]
+    public IActionResult LoadForm()
     {
-        [HttpGet]
-        public IActionResult Get() => Ok("Hello from plugin!");
+        return RedirectToAction("Index", "Home");
     }
+}
